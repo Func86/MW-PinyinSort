@@ -58,4 +58,4 @@ foreach ($lines as $line) {
 }
 
 $output .= ");\n}";
-file_put_contents(__DIR__ . '/../includes/ConversionTable.php', $output);
+file_put_contents(__DIR__ . '/../includes/PinyinConversion.php', $output);

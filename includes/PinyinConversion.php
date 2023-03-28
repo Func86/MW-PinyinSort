@@ -9,7 +9,7 @@
 
 namespace MediaWiki\Extension\PinyinSort;
 
-class ConversionTable {
+class PinyinConversion {
 public static $zh2pinyin = array(
 '㐀' => 'qiu',
 '㐁' => 'tian',

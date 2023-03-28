@@ -6,8 +6,12 @@ class PinyinCollation extends \Collation {
 	/** @var bool */
 	private $noPrefix;
 
-	public function __construct( $noPrefix = false ) {
+	/** @var bool */
+	private $withKana;
+
+	public function __construct( $noPrefix = false, $withKana = false ) {
 		$this->noPrefix = $noPrefix;
+		$this->withKana = $withKana;
 	}
 
 	/**
@@ -29,6 +33,9 @@ class PinyinCollation extends \Collation {
 	private function preprocess( &$str ) {
 		if ( $this->noPrefix ) {
 			$str = $this->trimPrefix( $str );
+		}
+		if ( $this->withKana ) {
+			$str = Converter::kana2Romaji( $str );
 		}
 	}
 

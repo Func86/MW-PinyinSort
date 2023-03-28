@@ -11,12 +11,16 @@ class Converter {
 			$charLen = strlen($char);
 			if (ord($char[0]) < 128) {
 				$builder .= $char;
-			} else if (isset(ConversionTable::$zh2pinyin[$char])) {
-				$builder .= ucfirst(ConversionTable::$zh2pinyin[$char]);
+			} else if (isset(PinyinConversion::$zh2pinyin[$char])) {
+				$builder .= ucfirst(PinyinConversion::$zh2pinyin[$char]);
 			} else {
 				$builder .= '?';
 			}
 		}
 		return $builder;
+	}
+
+	public static function kana2Romaji( $str ) {
+		return strtr( $str, KanaConversion::CONVERSION_TABLE );
 	}
 }
