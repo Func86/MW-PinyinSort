@@ -6,20 +6,19 @@
 	"version": "0.2.1",
 	"license-name": "BSD-2-Clause",
 	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.31.0"
+	},
 	"MessagesDirs": {
 		"PinyinSort": [
 			"i18n"
 		]
 	},
 	"Hooks": {
-		"Collation::factory": "PinyinSort\\Hooks::onFactory"
+		"Collation::factory": "MediaWiki\\Extension\\PinyinSort\\Hooks::onCollation__Factory"
 	},
-	"AutoloadClasses": {
-		"PinyinSort\\Hooks": "includes/Hooks.php",
-		"PinyinSort\\PinyinCollation": "includes/PinyinCollation.php",
-		"PinyinSort\\PinyinCollationNoPrefix": "includes/PinyinCollationNoPrefix.php",
-		"PinyinSort\\Converter": "includes/Converter.php",
-		"PinyinSort\\ConversionTable": "includes/ConversionTable.php"
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\PinyinSort\\": "includes/"
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }

@@ -1,5 +1,5 @@
 <?php
-namespace PinyinSort;
+namespace MediaWiki\Extension\PinyinSort;
 
 class PinyinCollationNoPrefix extends \Collation {
 

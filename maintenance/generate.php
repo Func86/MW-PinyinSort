@@ -22,7 +22,7 @@ $output = <<<EOT
  *
  */
 
-namespace PinyinSort;
+namespace MediaWiki\\Extension\\PinyinSort;
 
 class ConversionTable {
 public static \$zh2pinyin = array(

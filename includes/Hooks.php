@@ -1,9 +1,9 @@
 <?php
-namespace PinyinSort;
+namespace MediaWiki\Extension\PinyinSort;
 
 class Hooks {
 
-	public static function onFactory($collationName, &$collationObj) {
+	public static function onCollation__Factory($collationName, &$collationObj) {
 		if ($collationName === 'pinyin') {
 			$collationObj = new PinyinCollation();
 		} else if ($collationName === 'pinyin-noprefix') {
