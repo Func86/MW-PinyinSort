@@ -3,7 +3,37 @@ namespace MediaWiki\Extension\PinyinSort;
 
 class PinyinCollation extends \Collation {
 
+	/** @var bool */
+	private $noPrefix;
+
+	public function __construct( $noPrefix = false ) {
+		$this->noPrefix = $noPrefix;
+	}
+
+	/**
+	 * TODO: Use native title parsing provided by the core?
+	 */
+	private function trimPrefix($string) {
+		if (strpos($string, "\n") !== false) {
+			return $string;
+		} else {
+			$parts = explode(':', $string, 2);
+			if (!isset($parts[1]) || !$parts[1]) {
+				return $string;
+			} else {
+				return $parts[1] . "\n" . $string;
+			}
+		}
+	}
+
+	private function preprocess( &$str ) {
+		if ( $this->noPrefix ) {
+			$str = $this->trimPrefix( $str );
+		}
+	}
+
 	public function getSortKey($string) {
+		$this->preprocess($string);
 		if (strpos($string, "\n") === false) {
 			$key = $string;
 			$original = $string;
@@ -19,6 +49,7 @@ class PinyinCollation extends \Collation {
 	}
 
 	public function getFirstLetter($string) {
+		$this->preprocess($string);
 		$firstChar = mb_substr($string, 0, 1, 'UTF-8');
 		$pinyin = Converter::zh2pinyin($firstChar);
 		return ucfirst($pinyin[0]);

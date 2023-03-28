@@ -3,11 +3,16 @@ namespace MediaWiki\Extension\PinyinSort;
 
 class Hooks {
 
-	public static function onCollation__Factory($collationName, &$collationObj) {
-		if ($collationName === 'pinyin') {
-			$collationObj = new PinyinCollation();
-		} else if ($collationName === 'pinyin-noprefix') {
-			$collationObj = new PinyinCollationNoPrefix();
+	private const VALID_COLLATIONS = [
+		'pinyin',
+		'pinyin-noprefix'
+	];
+
+	public static function onCollation__Factory( $collationName, &$collationObj ) {
+		if ( in_array( $collationName, self::VALID_COLLATIONS ) ) {
+			$collationObj = new PinyinCollation(
+				$collationName === 'pinyin-noprefix'
+			);
 		}
 		return true;
 	}
